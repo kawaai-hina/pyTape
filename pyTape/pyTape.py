@@ -1,7 +1,7 @@
 class Tape:
     reg=[0]
-    __ptr=0
-    i,j,k=0,0,0
+    ptr=0
+    i=0
     def __init__(self):
         pass
     def __del__(self):
@@ -10,31 +10,34 @@ class Tape:
         self.reg[key]=val
     __getitem__=lambda self,key:self.reg[key]
     __len__=lambda self:len(self.reg)
+    getPtr=lambda self:self.ptr
     def do(self,op,ins):
         if op==">":
-            if (self.__ptr+1)==len(self.reg):
+            if (self.ptr+1)==len(self.reg):
                 self.reg.append(0)
-            self.__ptr+=1
+            self.ptr+=1
         elif op=="<":
-            if self.__ptr!=0:self.__ptr-=1
+            if self.ptr!=0:self.ptr-=1
         elif op=="+":
-            self.reg[self.__ptr]+=1
+            self.reg[self.ptr]+=1
         elif op=="-":
-            if self.reg[self.__ptr]!=0:self.reg[self.__ptr]-=1
+            if self.reg[self.ptr]!=0:self.reg[self.ptr]-=1
         elif op==".":
-            print(chr(self.reg[self.__ptr]),end="")
+            print(chr(self.reg[self.ptr]))
         elif op==",":
-            self.reg[self.__ptr]=abs(int(input(":")))
+            self.reg[self.ptr]=abs(int(input()))
         elif op=="*":
-            self.reg=[0];self.__ptr=0
+            self.reg=[0];self.ptr=0
         elif op=="?":
-            print("ptr:{}".format(self.__ptr))
+            print("ptr:{}".format(self.ptr))
         elif op=="[":
             loop=ins[self.i+1:].split("]")[0]
-            while self.reg[self.__ptr]:
+            while self.reg[self.ptr]:
                 for each in loop:
                     self.do(each,loop)
             self.i=ins.find("]",self.i)
+        elif op=="&":
+            print(int(self.reg[self.ptr]),end="")
     def exce(self,ins):
         self.i=0
         while self.i<len(ins):

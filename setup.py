@@ -3,10 +3,10 @@ with open("readme.md","r") as f:
 	long_description=f.read()
 setuptools.setup(
 	name="pyTape",
-	version="0.0.1",
+	version="0.0.2",
 	author="kawaai-hina",
 	author_email="kawaai@qq.com",
-	description="",
+	description="Tape",
 	long_description=long_description,
 	long_description_content_type="text/markdown",
 	url="https://github.com/kawaai-hina/pyTape",
