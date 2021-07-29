@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pyTape
-Version: 0.0.3
+Version: 0.0.5
 Summary: Tape
 Home-page: https://github.com/kawaai-hina/pyTape
 Author: kawaai-hina
@@ -66,7 +66,7 @@ script/dist目录下有两个文件，可以在windows或linux环境中执行一
 
 ~~exce()需要两个参数，其中一个是self~~，另外一个参数作为brainfxxk指令，以字符串的形式传递，如：
 
-> ```{实例名}.exce("++[->+<]")```
+> ```{实例名}.exce(<brainfxxk指令>)```或者```{实例名}(<brainfxxk指令>)```
 
 
 
@@ -94,7 +94,7 @@ script/dist目录下有两个文件，可以在windows或linux环境中执行一
 
 #### 运算符"["与"]"
 
-两个中括号括起来的运算作为循环体，指针所指元素作为while循环的条件(这个版本的模块不支持嵌套循环)
+两个中括号括起来的运算作为循环体，指针所指元素作为while循环的条件
 
 #### 运算符","
 

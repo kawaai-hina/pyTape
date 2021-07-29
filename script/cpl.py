@@ -10,7 +10,7 @@ def cpl():
             if content=="q" or content=="exit()":
                 break
             tape(content)
-            print("tape:{}\nptr:{}\n".format(tape,tape.ptr))
+            print("\ntape:{}\nptr:{}\n".format(tape,tape.ptr))
             count+=1
     else:
         for each in sys.argv:

@@ -2,6 +2,7 @@ class Tape:
     reg=[0]
     ptr=0
     i=0
+    loop=[]
     def __init__(self):
         pass
     def __del__(self):
@@ -14,31 +15,42 @@ class Tape:
     __len__=lambda self:len(self.reg)
     def do(self,op,ins):
         if op==">":
-            if (self.ptr+1)==len(self.reg):
+            if (self.ptr+1)==len(self):
                 self.reg.append(0)
             self.ptr+=1
         elif op=="<":
             if self.ptr!=0:self.ptr-=1
         elif op=="+":
-            self.reg[self.ptr]+=1
+            self[self.ptr]+=1
         elif op=="-":
-            if self.reg[self.ptr]!=0:self.reg[self.ptr]-=1
+            if self[self.ptr]!=0:self[self.ptr]-=1
         elif op==".":
-            print(chr(self.reg[self.ptr]),end="")
+            print(chr(self[self.ptr]),end="")
         elif op==",":
-            self.reg[self.ptr]=abs(int(input()))
+            self[self.ptr]=abs(int(input()))
         elif op=="*":
             self.reg=[0];self.ptr=0
         elif op=="?":
             print("ptr:{}".format(self.ptr))
         elif op=="[":
-            loop=ins[self.i+1:].split("]")[0]
-            while self.reg[self.ptr]:
-                for each in loop:
-                    self.do(each,loop)
-            self.i=ins.find("]",self.i)
+            if self[self.ptr]!=0:
+                self.loop.append(self.i)
+            else:
+                trim=0
+                for i in range(self.i,len(ins)):
+                    if ins[i]=="[":
+                        trim+=1
+                    elif ins[i]=="]":
+                        trim-=1
+                    if trim==0:
+                        self.i=i
+                        break
+        elif op=="]":
+            self.i=self.loop.pop()-1
         elif op=="&":
             print(int(self.reg[self.ptr]),end="")
+        elif op=="!":
+            self.ptr=self.reg[self.ptr]
     def exce(self,ins):
         self.i=0
         while self.i<len(ins):
