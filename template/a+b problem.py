@@ -1,4 +1,4 @@
-from pyTape import pyTape
+from pyTape import pyTape as pt
 op=",>,[-<+>]<&"
-tape=pyTape.Tape()
-tape.exce(op)
+tape=pt.Tape()
+tape(op)

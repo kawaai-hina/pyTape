@@ -52,7 +52,7 @@ script/dist目录下有两个文件，可以在windows或linux环境中执行一
 
 ~~exce()需要两个参数，其中一个是self~~，另外一个参数作为brainfxxk指令，以字符串的形式传递，如：
 
-> ```{实例名}.exce("++[->+<]")```
+> ```{实例名}.exce(<brainfxxk指令>)```或者```{实例名}(<brainfxxk指令>)```
 
 
 

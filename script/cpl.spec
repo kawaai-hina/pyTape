@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(['cpl.py'],
-             pathex=['D:\\E_Move\\github\\pyTape\\cpl'],
+             pathex=['/mnt/d/E_Move/github/pyTape/script'],
              binaries=[],
              datas=[],
              hiddenimports=[],

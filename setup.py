@@ -3,7 +3,7 @@ with open("readme.md","r") as f:
 	long_description=f.read()
 setuptools.setup(
 	name="pyTape",
-	version="0.0.2",
+	version="0.0.3",
 	author="kawaai-hina",
 	author_email="kawaai@qq.com",
 	description="Tape",

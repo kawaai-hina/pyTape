@@ -8,9 +8,10 @@ class Tape:
         pass
     def __setitem__(self,key,val):
         self.reg[key]=val
+    def __call__(self,arg):
+        self.exce(arg)
     __getitem__=lambda self,key:self.reg[key]
     __len__=lambda self:len(self.reg)
-    getPtr=lambda self:self.ptr
     def do(self,op,ins):
         if op==">":
             if (self.ptr+1)==len(self.reg):
@@ -23,7 +24,7 @@ class Tape:
         elif op=="-":
             if self.reg[self.ptr]!=0:self.reg[self.ptr]-=1
         elif op==".":
-            print(chr(self.reg[self.ptr]))
+            print(chr(self.reg[self.ptr]),end="")
         elif op==",":
             self.reg[self.ptr]=abs(int(input()))
         elif op=="*":
@@ -54,35 +55,35 @@ class Tape:
         temp=Tape()
         self.complete(self,other)
         for i in range(len(self)):
-            temp.exce(">")
+            temp(">")
             temp[i]=self[i]+other[i]
         return temp
     def __sub__(self,other):
         temp=Tape()
         self.complete(self,other)
         for i in range(len(self)):
-            temp.exce(">")
+            temp(">")
             temp[i]=abs(self[i]-other[i])
         return temp
     def __mul__(self,other):
         temp=Tape()
         self.complete(self,other)
         for i in range(len(self)):
-            temp.exce(">")
+            temp(">")
             temp[i]=self[i]*other[i]
         return temp
     def __truediv__(self,other):
         temp=Tape()
         self.complete(self,other)
         for i in range(len(self)):
-            temp.exce(">")
+            temp(">")
             temp[i]=int(self[i]/other[i])
         return temp
     def __mod__(self,other):
         temp=Tape()
         self.complete(self,other)
         for i in range(len(self)):
-            temp.exce(">")
+            temp(">")
             temp[i]=self[i]%other[i]
         return temp
     def __repr__(self):
