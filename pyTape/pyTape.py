@@ -2,7 +2,9 @@ class Tape:
     reg=[0]
     ptr=0
     i=0
-    loop=[]
+    cloop=[]
+    tloop=[]
+    repeat=""
     def __init__(self):
         pass
     def __del__(self):
@@ -34,7 +36,7 @@ class Tape:
             print("ptr:{}".format(self.ptr))
         elif op=="[":
             if self[self.ptr]!=0:
-                self.loop.append(self.i)
+                self.cloop.append(self.i)
             else:
                 trim=0
                 for i in range(self.i,len(ins)):
@@ -46,11 +48,52 @@ class Tape:
                         self.i=i
                         break
         elif op=="]":
-            self.i=self.loop.pop()-1
+            self.i=self.cloop.pop()-1
         elif op=="&":
             print(int(self.reg[self.ptr]),end="")
         elif op=="!":
             self.ptr=self.reg[self.ptr]
+        elif op.isdigit():
+            self.repeat+=op
+            self.i+=1
+            if ins[self.i].isdigit():
+                self.do(ins[self.i],ins)
+            elif ins[self.i]=="(":
+                if self.repeat!="":
+                    self.tloop.append(self.i)
+                else:
+                    trim=0
+                    for i in range(self.i,len(ins)):
+                        if ins[i]=="(":
+                            trim+=1
+                        elif ins[i]==")":
+                            trim-=1
+                        if trim==0:
+                            self.i=i
+                            break
+            else:
+                for i in range(int(self.repeat)):    
+                    self.do(ins[self.i],ins)
+                self.repeat=""
+        elif op=="(":
+            if self.repeat!="":
+                self.tloop.append(self.i)
+            else:
+                trim=0
+                for i in range(self.i,len(ins)):
+                    if ins[i]=="(":
+                        trim+=1
+                    elif ins[i]==")":
+                        trim-=1
+                    if trim==0:
+                        self.i=i
+                        break
+        elif op==")":
+            if self.repeat.isdigit():
+                self.repeat=str(int(self.repeat)-1)
+            if self.repeat=="0":
+                self.repeat=""
+            self.i=self.tloop.pop()-1
     def exce(self,ins):
         self.i=0
         while self.i<len(ins):

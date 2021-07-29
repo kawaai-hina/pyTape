@@ -13,9 +13,9 @@ def cpl():
             print("\ntape:{}\nptr:{}\n".format(tape,tape.ptr))
             count+=1
     else:
-        for each in sys.argv:
+        for each in sys.argv[1:]:
             print("\nIn {}:\n".format(each))
-            with open(fileName,"r") as f:
+            with open(each,"r") as f:
                 content=f.read()
             tape(content)
 if __name__ == '__main__':
